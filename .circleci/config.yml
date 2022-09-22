@@ -1,0 +1,22 @@
+version: 2.1
+
+executors:
+  exec:
+    docker:
+      - image: circleci/node:13.8.0
+
+jobs:
+  build:
+    executor: exec
+    steps:
+      - checkout
+      - run:
+          name: "build the project"
+          command: npm run lint
+
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  my-project-workflow:
+    jobs:
+      - build
